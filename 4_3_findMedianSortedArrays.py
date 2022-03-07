@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#
+# k = lens // 2 + 1 ，找到两个数组中第k大的数 或 第k大和第k-1大
 
 
 class Solution:
@@ -14,7 +14,7 @@ class Solution:
             if idx1 < m and (idx2 >= n or nums1[idx1] < nums2[idx2]):
                 right = nums1[idx1]
                 idx1 += 1
-            else:
+            else:  # idx1 >= m or (idx2 < n and nums1[idx1] >= nums2[idx2])
                 right = nums2[idx2]
                 idx2 += 1
 
