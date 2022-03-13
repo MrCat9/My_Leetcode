@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# k = lens // 2 + 1 ，找到两个数组中第k大的数 或 第k大和第k-1大
+# 双指针， k = lens // 2 + 1 ，找到两个数组中第k大的数 或 第k大和第k-1大
 
 
 class Solution:
