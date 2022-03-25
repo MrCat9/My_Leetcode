@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#
+# 数组翻转
 
 
 class Solution:
@@ -8,12 +8,15 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
 
-        pass
+        k = k % len(nums)
+        nums.reverse()  # reverse 比 [::-1] 快
+        nums[:k] = nums[:k][::-1]
+        nums[k:] = nums[k:][::-1]
 
 
 if __name__ == '__main__':
     test_nums = [1, 2, 3, 4, 5, 6, 7]
     test_k = 3
+    # [5, 6, 7, 1, 2, 3, 4]
 
-    test_result = Solution().sortedSquares(test_nums, test_k)
-    # print(test_result)
+    Solution().rotate(test_nums, test_k)
