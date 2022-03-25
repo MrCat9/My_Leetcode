@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# 倒叙循环
+# 倒序循环
 
 
 class Solution:
