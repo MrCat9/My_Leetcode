@@ -1,32 +1,33 @@
 # -*- coding: utf-8 -*-
 # 滑动窗口
+# 由于排列不会改变字符串中每个字符的个数，所以只有当两个字符串每个字符的个数均相等时，一个字符串才是另一个字符串的排列。
 
 
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        # 超时
         s1_len = len(s1)
         s2_len = len(s2)
-        left, right = 0, s1_len
-        s1_list = list(s1)
+        if s2_len < s1_len:
+            return False
+        cnt1 = [0] * 26
+        cnt2 = [0] * 26
+        ord_a = ord('a')
 
-        while right <= s2_len:
-            s1l = s1_list.copy()
-            sub_s2 = s2[left:right]
-            s1_is_sub_s2 = True
-            for i, x in enumerate(sub_s2):
-                if x in s1l:
-                    s1l.remove(x)
-                else:
-                    s1_is_sub_s2 = False
-                    if x not in s1_list:
-                        left += (i + 1)
-                    else:
-                        left += 1
-                    right = left + s1_len
-                    break
-            if s1_is_sub_s2:
+        # 计算s1和s2中各个字符的频率
+        for i in range(s1_len):
+            cnt1[ord(s1[i]) - ord_a] += 1
+            cnt2[ord(s2[i]) - ord_a] += 1
+        if cnt1 == cnt2:
+            return True
+
+        for i2 in range(s1_len, s2_len):
+            # 计算s2中各个字符的频率
+            cnt2[ord(s2[i2]) - ord_a] += 1
+            cnt2[ord(s2[i2 - s1_len]) - ord_a] -= 1
+
+            if cnt1 == cnt2:
                 return True
+
         return False
 
 
