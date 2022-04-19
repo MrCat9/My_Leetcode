@@ -7,24 +7,18 @@ class Solution:
         m = len(grid)  # 行
         n = len(grid[0])  # 列
         max_area = 0
-        # seen_set = set()
 
         def get_island_area(sx, sy):  # DFS
             grid[sy][sx] = 0
             ia = 1
-                for new_x, new_y in [(_x - 1, _y), (_x + 1, _y), (_x, _y - 1), (_x, _y + 1)]:
-                    if 0 <= new_x < n and 0 <= new_y < m and grid[new_y][new_x] == 1:
-                        # seen_set.add((new_x, new_y))
-                        grid[new_y][new_x] = 0  # 置0
-                        i_list.append((new_x, new_y))
-                        ia += 1
+            for new_x, new_y in [(sx - 1, sy), (sx + 1, sy), (sx, sy - 1), (sx, sy + 1)]:
+                if 0 <= new_x < n and 0 <= new_y < m and grid[new_y][new_x] == 1:
+                    grid[new_y][new_x] = 0  # 置0
+                    ia += get_island_area(new_x, new_y)
             return ia
 
         for y, row in enumerate(grid):
             for x, cell in enumerate(row):
-                # if (x, y) in seen_set:
-                #     continue
-                # seen_set.add((x, y))
                 if cell == 0:
                     continue
                 else:
