@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# 广度优先遍历
+# 深度优先遍历
 
 
 # Definition for a binary tree node.
@@ -17,25 +17,13 @@ class Solution:
         if not root1:
             return root2
 
-        node_list = [(root1, root2)]
-        while node_list:
-            node1, node2 = node_list.pop(0)
-            v1 = node1.val
-            v2 = node2.val  # if node2.val else 0
-            node1.val = v1 + v2
-            # if node1.val == 0:
-            #     node1.val = None
+        new_node = TreeNode(
+            val=root1.val + root2.val,
+            left=self.mergeTrees(root1.left, root2.left),
+            right=self.mergeTrees(root1.right, root2.right),
+        )
 
-            if node2.left:
-                if not node1.left:
-                    node1.left = TreeNode()
-                node_list.append((node1.left, node2.left))
-            if node2.right:
-                if not node1.right:
-                    node1.right = TreeNode()
-                node_list.append((node1.right, node2.right))
-
-        return root1
+        return new_node
 
 
 if __name__ == '__main__':
